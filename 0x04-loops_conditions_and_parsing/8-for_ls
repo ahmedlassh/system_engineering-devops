@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
-# This script lists files in the current directory and displays only the part after the first dash
+# This script lists files in the current directory and shows the part after the first dash if any
 
 for file in *; do
-  [ -f "$file" ] || continue
-  echo "${file#*-}"
+  [ -f "$file" ] || continue  # skip if not a regular file
+  case "$file" in
+    *-*)
+      echo "${file#*-}"
+      ;;
+    *)
+      echo "$file"
+      ;;
+  esac
 done
